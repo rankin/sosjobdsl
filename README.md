@@ -22,7 +22,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'sosjobdsl'
+
+    x = Sosjobdsl::Job.new("My Test Job") do
+      description "My job is so great!"
+      enabled "yes"
+
+      setting :mail_on_success, "yes"
+      setting :log_mail_to, "crankin@pangeare.com"
+
+      execute :file => "/path/to/file.exe", :ignore_error => "no"
+
+      schedule({:run_once => "yes"}) do
+        day "2015-08-13"
+        day "2015-12-24"
+        weekday "1 3 5"
+        monthday "4 5 6"
+        monthday "3rd", "Monday"
+        holiday "2015-12-25"
+        holiday "2015-12-24"
+      end
+    end
+
+    x.to_xml
 
 ## Development
 
