@@ -182,7 +182,7 @@ module Sosjobdsl
         }
       end  
 
-      puts builder.to_xml
+      return builder.to_xml
     end
 
     private
