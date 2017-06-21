@@ -20,7 +20,7 @@ module Sosjobdsl
       delegate_name = subclass.to_s.split('::').pop(2)
                         .first.gsub(/([A-Z])/, '_\1').downcase.sub(/^_/, '')
 
-      alias_method delegate_name.to_sym, :delegate
+      subclass.send(:alias_method, delegate_name.to_sym, :delegate)
     end
   end
 end
