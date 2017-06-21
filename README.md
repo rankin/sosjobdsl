@@ -45,6 +45,35 @@ Or install it yourself as:
 
     x.to_xml
 
+produces
+
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <job title="My Test Job" name="my_test_job" enabled="yes">
+      <description>My job is so great!</description>
+      <params>
+        <param name="foo" value="bar"/>
+      </params>
+      <run_time>
+        <date date="2015-08-13"/>
+        <date date="2015-12-24"/>
+        <weekdays>
+          <day day="1">
+            <period single_start="08:00"/>
+          </day>
+        </weekdays>
+        <monthdays>
+          <weekday day="monday" which="3">
+            <period begin="08:00" end="12:30"/>
+          </weekday>
+          <day day="4"/>
+        </monthdays>
+        <holidays>
+          <holiday date="2015-12-25"/>
+          <holiday date="2015-12-24"/>
+        </holidays>
+      </run_time>
+    </job>
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
