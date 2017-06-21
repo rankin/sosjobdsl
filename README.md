@@ -37,7 +37,7 @@ Or install it yourself as:
         day "2015-12-24"
         weekday "1", single_start: '08:00'
         monthday "4"
-        monthday "Monday", 3, begin: '08:00', end: '12:30'
+        monthday "3rd", "Monday", begin: '08:00', end: '12:30'
         holiday "2015-12-25"
         holiday "2015-12-24"
       end

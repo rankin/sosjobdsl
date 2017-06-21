@@ -105,12 +105,12 @@ module Sosjobdsl
       end
 
       def monthday(x, *periods)
-        if x.to_i != 0
-          schedule.monthdays[:day][x] = periods
+        if periods.first.is_a? String
+          schedule.monthdays[:weekday][periods.shift.downcase] = { which: x.to_i,
+                                                                   periods: periods
+                                                                 }
         else
-          schedule.monthdays[:weekday][x] = { which: periods.shift,
-                                              periods: periods
-                                            }
+          schedule.monthdays[:day][x] = periods
         end
       end
 
