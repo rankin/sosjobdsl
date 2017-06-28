@@ -3,7 +3,9 @@ module Sosjobdsl
     attr_accessor :description,
                   :options,
                   :schedule,
-                  :params
+                  :params,
+                  :script,
+                  :script_opts
 
     def initialize(title, &block)
 
@@ -13,6 +15,10 @@ module Sosjobdsl
       }
 
       self.description = ""
+
+      self.script = ""
+
+      self.script_opts = {}
 
       DSL.evaluate(self, &block) if block_given?
     end
@@ -27,6 +33,12 @@ module Sosjobdsl
         this.params.build_xml(xml) if this.params
 
         this.schedule.build_xml(xml) if this.schedule
+
+        unless this.script.blank?
+          xml.script(this.script_opts) do
+            xml.cdata(this.script)
+          end
+        end
 
       end
 
@@ -55,6 +67,11 @@ module Sosjobdsl
 
       def params(&block)
         job.params = Params.new(&block)
+      end
+
+      def script(defintion, opts={})
+        job.script = definition
+        job.script_opts = opts
       end
 
     end
