@@ -25,7 +25,7 @@ module Sosjobdsl
         weekday: {}
       }
 
-      DSL.evaluate(self, &block)
+      DSL.evaluate(self, &block) if block_given?
     end
 
     def build_xml(xml = Nokogiri::XML::Builder.new({ encoding: 'ISO-8859-1' }))
