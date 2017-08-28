@@ -28,23 +28,51 @@ Or install it yourself as:
       description "My job is so great!"
       enabled "yes"
 
-      setting :mail_on_success, "yes"
-      setting :log_mail_to, "crankin@pangeare.com"
+      params do
+        param "foo", "bar"
+      end
 
-      execute :file => "/path/to/file.exe", :ignore_error => "no"
-
-      schedule({:run_once => "yes"}) do
+      schedule do
         day "2015-08-13"
         day "2015-12-24"
-        weekday "1 3 5"
-        monthday "4 5 6"
-        monthday "3rd", "Monday"
+        weekday "1", single_start: '08:00'
+        monthday "4"
+        monthday "3rd", "Monday", begin: '08:00', end: '12:30'
         holiday "2015-12-25"
         holiday "2015-12-24"
       end
     end
 
     x.to_xml
+
+produces
+
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <job title="My Test Job" name="my_test_job" enabled="yes">
+      <description>My job is so great!</description>
+      <params>
+        <param name="foo" value="bar"/>
+      </params>
+      <run_time>
+        <date date="2015-08-13"/>
+        <date date="2015-12-24"/>
+        <weekdays>
+          <day day="1">
+            <period single_start="08:00"/>
+          </day>
+        </weekdays>
+        <monthdays>
+          <weekday day="monday" which="3">
+            <period begin="08:00" end="12:30"/>
+          </weekday>
+          <day day="4"/>
+        </monthdays>
+        <holidays>
+          <holiday date="2015-12-25"/>
+          <holiday date="2015-12-24"/>
+        </holidays>
+      </run_time>
+    </job>
 
 ## Development
 
