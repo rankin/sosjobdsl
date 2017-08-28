@@ -34,7 +34,7 @@ module Sosjobdsl
 
         this.schedule.build_xml(xml) if this.schedule
 
-        unless this.script.blank?
+        unless this.script.empty?
           xml.script(this.script_opts) do
             xml.cdata(this.script)
           end
