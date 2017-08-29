@@ -33,7 +33,6 @@ module Sosjobdsl
         this.params.build_xml(xml) if this.params
 
         this.schedule.build_xml(xml) if this.schedule
-
         unless this.script.empty?
           xml.script(this.script_opts) do
             xml.cdata(this.script)
@@ -69,8 +68,8 @@ module Sosjobdsl
         job.params = Params.new(&block)
       end
 
-      def script(defintion, opts={})
-        job.script = definition
+      def script(source, opts={})
+        job.script = source
         job.script_opts = opts
       end
 
