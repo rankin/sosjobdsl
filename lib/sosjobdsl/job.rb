@@ -30,15 +30,16 @@ module Sosjobdsl
 
         xml.description(this.description) unless this.description.empty?
 
-        this.params.build_xml(xml) if this.params
-
-        this.schedule.build_xml(xml) if this.schedule
         unless this.script.empty?
           xml.script(this.script_opts) do
             xml.cdata(this.script)
           end
         end
 
+        this.params.build_xml(xml) if this.params
+
+        this.schedule.build_xml(xml) if this.schedule
+        
       end
 
       xml
